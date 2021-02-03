@@ -14,22 +14,23 @@ import numpy as np
 
 # Preparing Data
 data = pd.read_pickle("signs_data.pkl")
-pca = PCA(n_components=1200)
+pca = PCA(n_components=600)
 scaler = StandardScaler()
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # X = pca.fit_transform(X, y)
 scaler.fit(X=X)
 # X = scaler.transform(X)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 # Making model using SVM
-
-svm = SVC(C=0.023, kernel='poly')
-svm.fit(X_train, y_train)
-y_pred = svm.predict(X_test)
-print("SVC accuracy = " + str(accuracy_score(y_test, y_pred)))
+values: list = [0.005]
+for i in values:
+    svm = SVC(C=i, kernel='poly')
+    svm.fit(X_train, y_train)
+    y_pred = svm.predict(X_test)
+    print("SVC accuracy = " + str(accuracy_score(y_test, y_pred)))
 
 
 # Making model using NNC
