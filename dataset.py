@@ -21,7 +21,7 @@ def get_dataset():
             temp.append(i)
             dataset.append(temp)
     df = pd.DataFrame(dataset)
-    df.to_pickle("data_frame.pkl")
+    df.to_pickle("signs_data.pkl")
     return df
 
 
